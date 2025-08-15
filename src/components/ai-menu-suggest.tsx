@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from 'react';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useEffect, useRef, useState, useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { Lightbulb, LocateFixed, Send } from "lucide-react";
 import { getMenuSuggestions } from '@/app/actions';
 import { Section } from "./section";
@@ -30,7 +30,7 @@ function SubmitButton() {
 }
 
 export function AiMenuSuggest() {
-  const [state, formAction] = useFormState(getMenuSuggestions, initialState);
+  const [state, formAction] = useActionState(getMenuSuggestions, initialState);
   const [timeOfDay, setTimeOfDay] = useState('');
   const [location, setLocation] = useState('');
   const formRef = useRef<HTMLFormElement>(null);
@@ -61,10 +61,6 @@ export function AiMenuSuggest() {
       navigator.geolocation.getCurrentPosition(
         () => {
           setLocation('My current location');
-          toast({
-             title: "Location detected",
-             description: "Using your current location for suggestions.",
-          });
         },
         () => {
           toast({
