@@ -11,105 +11,6 @@
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
-const menuCategories = [
-  {
-    category: "Nasi Goreng",
-    items: [
-      { name: "Ayam (Biasa)", price: "13K" },
-      { name: "Bakso", price: "13K" },
-      { name: "Sosis", price: "13K" },
-      { name: "Magelangan", price: "13K" },
-      { name: "Hongkong", price: "14K" },
-      { name: "Cumi", price: "15K" },
-      { name: "Jumbo", price: "18K" },
-      { name: "Mawut", price: "18K" },
-      { name: "Ati Ampela", price: "18K" },
-      { name: "Spesial", price: "18K" },
-      { name: "Istimewa", price: "20K" },
-    ],
-  },
-  {
-    category: "Bakmi",
-    description: "Goreng / Rebus",
-    items: [
-      { name: "Ayam (Biasa)", price: "13K" },
-      { name: "Bakso", price: "13K" },
-      { name: "Sosis", price: "13K" },
-      { name: "Spesial", price: "18K" },
-      { name: "Jumbo", price: "18K" },
-      { name: "Ati Ampela", price: "18K" },
-    ],
-  },
-  {
-    category: "Kwetiau",
-    description: "Goreng / Rebus",
-    items: [
-      { name: "Ayam (Biasa)", price: "13K" },
-      { name: "Bakso", price: "13K" },
-      { name: "Sosis", price: "13K" },
-      { name: "Spesial", price: "18K" },
-      { name: "Jumbo", price: "18K" },
-      { name: "Ati Ampela", price: "18K" },
-    ],
-  },
-  {
-    category: "Bihun",
-    description: "Goreng / Rebus",
-    items: [
-      { name: "Ayam (Biasa)", price: "13K" },
-      { name: "Bakso", price: "13K" },
-      { name: "Sosis", price: "13K" },
-      { name: "Spesial", price: "18K" },
-      { name: "Jumbo", price: "18K" },
-      { name: "Ati Ampela", price: "18K" },
-    ],
-  },
-  {
-    category: "Capcay",
-    items: [
-      { name: "Ayam (Biasa)", price: "13K" },
-      { name: "Bakso", price: "13K" },
-      { name: "Sosis", price: "13K" },
-      { name: "Spesial", price: "18K" },
-      { name: "Jumbo", price: "18K" },
-      { name: "Ati Ampela", price: "18K" },
-    ],
-  },
-  {
-    category: "Topping",
-    items: [
-      { name: "Telur Dadar", price: "4K" },
-      { name: "Telur Ceplok Mata Sapi", price: "4K" },
-      { name: "Sosis", price: "1K" },
-      { name: "Bakso", price: "1K" },
-    ],
-  },
-  {
-    category: "Minuman",
-    description: "Es / Panas",
-    items: [
-        { name: "Teh", price: "3K" },
-        { name: "Jeruk", price: "3K" },
-        { name: "Lemon", price: "4K" },
-        { name: "Nutrisari", price: "4K" },
-        { name: "Segar Dingin", price: "4K" },
-        { name: "Susu Coklat/Putih", price: "4K" },
-        { name: "Good Day", price: "4K" },
-        { name: "Indocafe Coffeemix", price: "4K" },
-        { name: "Luwak Whitecoffee", price: "4K" },
-        { name: "Torabika Cappuccino", price: "4K" },
-        { name: "Nescafe Clasic", price: "4K" },
-        { name: "Kopi Kapal Api", price: "4K" },
-        { name: "Jahe", price: "4K" },
-        { name: "Jahe Susu", price: "4K" },
-        { name: "Lemontea", price: "4K" },
-        { name: "Teh Susu", price: "4K" },
-        { name: "Milo", price: "4K" },
-        { name: "Chocolatos", price: "4K" },
-    ]
-  }
-];
-
 const MenuSuggestionsInputSchema = z.object({
   timeOfDay: z
     .string()
@@ -133,26 +34,20 @@ export async function suggestMenuItems(input: MenuSuggestionsInput): Promise<Men
 
 const prompt = ai.definePrompt({
   name: 'menuSuggestionsPrompt',
-  input: {schema: MenuSuggestionsInputSchema.extend({menu: z.any()})},
+  input: {schema: MenuSuggestionsInputSchema},
   output: {schema: MenuSuggestionsOutputSchema},
-  prompt: `You are a helpful assistant that suggests menu items from Nasgor X Starbag Muzar based on the time of day and customer location.
+  prompt: `You are a helpful assistant for a modern, street-food style fried rice restaurant called "Nasgor X Starbag Muzar".
 
-You MUST only suggest items from the following menu. Do not suggest anything that is not on this list.
-
-Menu:
-{{#each menu}}
-- {{category}}{{#if description}} ({{description}}){{/if}}:
-  {{#each items}}
-  - {{name}} ({{price}})
-  {{/each}}
-{{/each}}
+Your goal is to suggest creative and appealing menu items based on the time of day and the customer's location. The restaurant is open from 4:00 PM (16:00) to 2:00 AM (02:00).
 
 It is currently {{{timeOfDay}}} and the customer is in {{{location}}}.
 
-Suggest a maximum of 5 menu items based on the rules below.
+Suggest a maximum of 5 menu items based on the rules below:
 
-- If the time is between 10:00 PM (22:00) and 2:00 AM (02:00), suggest an extra spicy dish. You can suggest any of the Nasi Goreng, Bakmi, Kwetiau, or Bihun dishes and mention that it can be made extra spicy.
-- If the time is past midnight (00:00 or later), include a sleep aid such as hot tea ('Teh' panas) in the suggestions.
+- If the time is between 10:00 PM (22:00) and 2:00 AM (02:00), suggest something extra spicy and satisfying for a late-night craving. For example, "Nasi Goreng Mawut extra pedas" or "Bakmi Goreng Spesial dengan topping lelehan telur."
+- If the time is past midnight (00:00 or later), include a comforting drink suggestion like hot tea ('Teh' panas) or ginger milk ('Jahe Susu').
+- Be creative with your suggestions. You can combine items or suggest variations (e.g., "extra spicy", "with a sunny-side-up egg").
+- Keep the suggestions exciting and in line with a modern, trendy street food vibe.
 `,
 });
 
@@ -163,7 +58,7 @@ const suggestMenuItemsFlow = ai.defineFlow(
     outputSchema: MenuSuggestionsOutputSchema,
   },
   async input => {
-    const {output} = await prompt({...input, menu: menuCategories});
+    const {output} = await prompt(input);
     return output!;
   }
 );
