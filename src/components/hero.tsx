@@ -1,17 +1,15 @@
-import Image from 'next/image';
 import { HeroClient } from './hero-client';
 
 export function Hero() {
   return (
     <header className="relative min-h-[88vh] flex items-end overflow-hidden">
-      <Image
-        src="https://placehold.co/1920x1080.png"
-        alt="Suasana memasak nasi goreng dengan api besar"
-        fill
-        quality={80}
-        className="z-0 object-cover opacity-30"
-        data-ai-hint="wok fire"
-        priority
+      <video
+        src="http://nasgormuzar.my.id/video/video3.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="z-0 object-cover opacity-30 absolute h-full w-full top-0 left-0"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent z-10" />
       <div className="absolute inset-0 bg-radial-gradient-bottom-gold z-10" />
