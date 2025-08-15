@@ -83,6 +83,8 @@ const menuCategories = [
     items: [
       { name: "Telur Dadar", price: "4K" },
       { name: "Telur Ceplok Mata Sapi", price: "4K" },
+      { name: "Sosis", price: "1K" },
+      { name: "Bakso", price: "1K" },
     ],
   },
   {
