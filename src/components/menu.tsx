@@ -63,6 +63,54 @@ const menuCategories = [
       { name: "Ati Ampela", price: "18K" },
     ],
   },
+  {
+    category: "Capcay",
+    image: "https://placehold.co/400x300.png",
+    aiHint: "capcay vegetables",
+    items: [
+      { name: "Ayam (Biasa)", price: "13K" },
+      { name: "Bakso", price: "13K" },
+      { name: "Sosis", price: "13K" },
+      { name: "Spesial", price: "18K" },
+      { name: "Jumbo", price: "18K" },
+      { name: "Ati Ampela", price: "18K" },
+    ],
+  },
+  {
+    category: "Topping",
+    image: "https://placehold.co/400x300.png",
+    aiHint: "fried egg",
+    items: [
+      { name: "Telur Dadar", price: "4K" },
+      { name: "Telur Ceplok Mata Sapi", price: "4K" },
+    ],
+  },
+  {
+    category: "Minuman",
+    description: "Es / Panas",
+    image: "https://placehold.co/400x300.png",
+    aiHint: "iced drinks",
+    items: [
+        { name: "Teh", price: "3K" },
+        { name: "Jeruk", price: "3K" },
+        { name: "Lemon", price: "4K" },
+        { name: "Nutrisari", price: "4K" },
+        { name: "Segar Dingin", price: "4K" },
+        { name: "Susu Coklat/Putih", price: "4K" },
+        { name: "Good Day", price: "4K" },
+        { name: "Indocafe Coffeemix", price: "4K" },
+        { name: "Luwak Whitecoffee", price: "4K" },
+        { name: "Torabika Cappuccino", price: "4K" },
+        { name: "Nescafe Clasic", price: "4K" },
+        { name: "Kopi Kapal Api", price: "4K" },
+        { name: "Jahe", price: "4K" },
+        { name: "Jahe Susu", price: "4K" },
+        { name: "Lemontea", price: "4K" },
+        { name: "Teh Susu", price: "4K" },
+        { name: "Milo", price: "4K" },
+        { name: "Chocolatos", price: "4K" },
+    ]
+  }
 ];
 
 export function Menu() {
