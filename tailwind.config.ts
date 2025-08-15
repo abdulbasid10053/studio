@@ -8,10 +8,17 @@ export default {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    container: {
+      center: true,
+      padding: '1rem',
+      screens: {
+        '2xl': '1100px',
+      },
+    },
     extend: {
       fontFamily: {
         body: ['Inter', 'sans-serif'],
-        headline: ['Inter', 'sans-serif'],
+        headline: ['Space Grotesk', 'sans-serif'],
         code: ['monospace'],
       },
       colors: {
@@ -88,11 +95,25 @@ export default {
             height: '0',
           },
         },
+        flame: {
+          '0%, 100%': { transform: 'scale(1, 1) rotate(0deg)' },
+          '50%': { transform: 'scale(1.1, 1.05) rotate(5deg)' },
+        },
+        scroll: {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-50%)' },
+        }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        flame: 'flame 7s ease-in-out infinite',
+        scroll: 'scroll 20s linear infinite',
       },
+      backgroundImage: {
+        'radial-gradient-bottom-gold': 'radial-gradient(1500px 500px at 50% 120%, hsla(var(--primary) / 0.12), transparent 50%)',
+        'conic-flame': 'conic-gradient(from 180deg at 50% 100%, hsla(var(--primary) / 0.55), hsla(var(--foreground)/ 0.1), hsla(var(--primary) / 0.25), transparent)',
+      }
     },
   },
   plugins: [require('tailwindcss-animate')],
