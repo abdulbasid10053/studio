@@ -1,6 +1,7 @@
 import { AiMenuSuggest } from "@/components/ai-menu-suggest";
 import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
+import { Location } from "@/components/location";
 import { Menu } from "@/components/menu";
 import { Order } from "@/components/order";
 import { OrderDock } from "@/components/order-dock";
@@ -16,6 +17,7 @@ export default function Home() {
         <Menu />
         <AiMenuSuggest />
         <Socials />
+        <Location />
         <Order />
       </main>
       <Footer />
