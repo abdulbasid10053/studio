@@ -6,6 +6,7 @@ import { Menu } from "@/components/menu";
 import { Order } from "@/components/order";
 import { OrderDock } from "@/components/order-dock";
 import { Payment } from "@/components/payment";
+import { PromoStory } from "@/components/promo-story";
 import { Socials } from "@/components/socials";
 import { WhyUs } from "@/components/why-us";
 
@@ -16,6 +17,7 @@ export default function Home() {
       <main>
         <WhyUs />
         <Menu />
+        <PromoStory />
         <AiMenuSuggest />
         <Socials />
         <Location />
