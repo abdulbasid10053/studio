@@ -15,7 +15,7 @@ export function Footer() {
       <div className="grid md:grid-cols-2 gap-8">
         <div>
           <h3 className="font-headline font-bold text-lg mb-2 text-foreground">Jam Operasional</h3>
-          <p>Setiap hari: <strong>16.00 – 02.00 WIB</strong></p>
+          <p>Setiap hari: <strong>18.00 – 01.00 WIB</strong></p>
         </div>
         <div>
           <h3 className="font-headline font-bold text-lg mb-2 text-foreground">Ikuti & Kunjungi</h3>

@@ -14,7 +14,7 @@ export function HeroClient() {
       const hours = Math.floor(totalSeconds / 3600);
       const minutes = Math.floor((totalSeconds % 3600) / 60);
       const seconds = totalSeconds % 60;
-      return `${hours}j ${minutes}m ${String(seconds).padStart(2, "0")}d`;
+      return `${hours}j ${minutes}m ${String(seconds).padStart(1, "0")}d`;
     };
 
     const updateStatus = () => {
@@ -22,17 +22,17 @@ export function HeroClient() {
       const h = now.getUTCHours() + 7; // Get current hour in WIB (UTC+7)
       const currentHour = h >= 24 ? h - 24 : h;
       
-      const isOpen = (currentHour >= 16 || currentHour < 2);
+      const isOpen = (currentHour >= 17 || currentHour < 1);
       
-      setStatus(isOpen ? '🔥 BUKA sekarang' : '⏳ TUTUP — siap buka 16.00');
+      setStatus(isOpen ? '🔥 BUKA sekarang' : '⏳ TUTUP — siap buka 17.00');
       
       if(isOpen) {
         setCountdown('Sedang buka — ayo pesan sekarang.');
       } else {
         const target = new Date();
-        target.setUTCHours(16 - 7, 0, 0, 0); // Target 16:00 WIB today
+        target.setUTCHours(17 - 7, 0, 0, 0); // Target 17:00 WIB today
         if(now.getTime() > target.getTime()) {
-          // If it's past 16:00 WIB, target next day's 16:00 WIB
+          // If it's past 17:00 WIB, target next day's 17:00 WIB
           target.setUTCDate(target.getUTCDate() + 1);
         }
         const ms = target.getTime() - now.getTime();
@@ -60,7 +60,7 @@ export function HeroClient() {
       </h1>
 
       <p className="max-w-3xl text-base md:text-lg text-foreground/80">
-        Nasi goreng anti-mainstream dengan vibe street food modern. <strong>Buka 16.00 – 02.00 WIB</strong>. Api besar, rasa nendang, porsi jelas.
+        Nasi goreng anti-mainstream dengan vibe street food modern. <strong>Buka 17.00 – 01.00 WIB</strong>. Api besar, rasa nendang, porsi jelas.
       </p>
       <p className="mt-1.5 text-primary min-h-6">{countdown}</p>
       
@@ -77,6 +77,9 @@ export function HeroClient() {
         <Button asChild variant="secondary" size="lg" className="rounded-xl px-5 py-3 font-semibold">
           <a href="https://www.instagram.com/nasgorxstarbag/" target="_blank" rel="noopener">Instagram</a>
         </Button>
+        <Button asChild variant="secondary" size="lg" className="rounded-xl px-5 py-3 font-semibold">
+          <a href="https://wa.me/6285123867500" target="_blank" rel="noopener">WhatsApp</a>
+        </Button>
       </div>
 
       <div className="w-full overflow-hidden whitespace-nowrap bg-card/50 border border-primary/30 p-2.5 rounded-lg backdrop-blur-sm shadow-lg">
@@ -84,14 +87,14 @@ export function HeroClient() {
           <span className="mx-4">🔥 Api besar</span>
           <span className="mx-4">🍳 Telur lumer</span>
           <span className="mx-4">🥡 Porsi mantap</span>
-          <span className="mx-4">🕓 Buka 16.00–02.00</span>
+          <span className="mx-4">🕓 Buka 17.00–01.00</span>
           <span className="mx-4">🎵 Viral di TikTok & IG</span>
         </div>
         <div className="inline-block animate-scroll" aria-hidden="true">
           <span className="mx-4">🔥 Api besar</span>
           <span className="mx-4">🍳 Telur lumer</span>
           <span className="mx-4">🥡 Porsi mantap</span>
-          <span className="mx-4">🕓 Buka 16.00–02.00</span>
+          <span className="mx-4">🕓 Buka 17.00–01.00</span>
           <span className="mx-4">🎵 Viral di TikTok & IG</span>
         </div>
       </div>

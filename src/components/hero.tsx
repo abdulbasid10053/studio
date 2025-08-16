@@ -4,7 +4,7 @@ export function Hero() {
   return (
     <header className="relative min-h-[88vh] flex items-end overflow-hidden">
       <video
-        src="http://nasgormuzar.my.id/video/video3.mp4"
+        src="https://nasgormuzar.my.id/video/video3.mp4"
         autoPlay
         loop
         muted
