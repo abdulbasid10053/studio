@@ -16,8 +16,15 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'i.gojekapi.com', // Ganti dengan domain Anda
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 };
+
 
 export default nextConfig;
