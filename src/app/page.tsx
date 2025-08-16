@@ -5,6 +5,7 @@ import { Location } from "@/components/location";
 import { Menu } from "@/components/menu";
 import { Order } from "@/components/order";
 import { OrderDock } from "@/components/order-dock";
+import { Payment } from "@/components/payment";
 import { Socials } from "@/components/socials";
 import { WhyUs } from "@/components/why-us";
 
@@ -19,6 +20,7 @@ export default function Home() {
         <Socials />
         <Location />
         <Order />
+        <Payment />
       </main>
       <Footer />
       <OrderDock />
