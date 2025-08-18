@@ -18,10 +18,10 @@ export default function Home() {
         <WhyUs />
         <PromoStory />
         <Menu />
+        <Payment />
         <AiMenuSuggest />
         <Socials />
         <Order />
-        <Payment />
         <Location />
       </main>
       <Footer />

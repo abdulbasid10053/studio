@@ -5,7 +5,7 @@ import { Section } from "./section";
 const menuCategories = [
   {
     category: "Nasi Goreng",
-    image: "https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/dba620ec-2ae9-46cd-87c8-5646890b9a0d_Go-Biz_20250521_200352.jpeg",
+    image: "/image/nasi goreng.webp",
     aiHint: "fried rice",
     items: [
       { name: "Ayam (Biasa)", price: "13K" },
@@ -24,7 +24,7 @@ const menuCategories = [
   {
     category: "Bakmi",
     description: "Goreng / Rebus",
-    image: "https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/9bb9e6b1-e4cf-4ff0-838c-cbe4ac325482_Go-Biz_20250519_190525.jpeg",
+    image: "/image/bakmi.webp",
     aiHint: "fried noodles",
     items: [
       { name: "Ayam (Biasa)", price: "13K" },
@@ -38,7 +38,7 @@ const menuCategories = [
   {
     category: "Kwetiau",
     description: "Goreng / Rebus",
-    image: "https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/0d41d2db-b59a-4491-b9b3-b04c5203cf9c_Go-Food-Merchant_20250519_191830.jpeg",
+    image: "/image/kwetiaw.webp",
     aiHint: "kwetiau noodles",
     items: [
       { name: "Ayam (Biasa)", price: "13K" },
@@ -52,7 +52,7 @@ const menuCategories = [
   {
     category: "Bihun",
     description: "Goreng / Rebus",
-    image: "https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/9de974b7-ce6e-4684-be83-730abc9c3103_Go-Biz_20250529_191538.jpeg",
+    image: "/image/bihun.webp",
     aiHint: "bihun noodles",
     items: [
       { name: "Ayam (Biasa)", price: "13K" },
@@ -65,7 +65,7 @@ const menuCategories = [
   },
   {
     category: "Capcay",
-    image: "https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/b82f0caa-9515-4f6d-8c48-89ae2413efbf_Go-Biz_20250521_200537.jpeg",
+    image: "/image/capcay.webp",
     aiHint: "capcay vegetables",
     items: [
       { name: "Ayam (Biasa)", price: "13K" },
@@ -78,7 +78,7 @@ const menuCategories = [
   },
   {
     category: "Topping",
-    image: "https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/eb8c3b7d-1dfd-410d-b3bc-8b11b3a20dee_Go-Biz_20250521_200614.jpeg",
+    image: "/image/nasi goreng.webp",
     aiHint: "fried egg",
     items: [
       { name: "Telur Dadar", price: "4K" },
@@ -90,7 +90,7 @@ const menuCategories = [
   {
     category: "Minuman",
     description: "Es / Panas",
-    image: "https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/dd1b7f7b-aacd-4ad3-869b-8c991cd9deb1_Go-Food-Merchant_20250525_211325.jpeg",
+    image: "/image/minuman.webp",
     aiHint: "iced drinks",
     items: [
         { name: "Teh", price: "3K" },
