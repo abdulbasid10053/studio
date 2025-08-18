@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next'; // ✅ Tambahkan Viewport
 import Script from 'next/script';
 import { Toaster } from "@/components/ui/toaster";
 import './globals.css';
@@ -6,11 +6,10 @@ import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
   title: 'Muzar Eats — Dari Senja Sampai Pagi',
-  description: 'Warung Nasi Goreng X Starbag Muzar. Buka dari jam 16.00 sampai 02.00. Pesan via ShopeeFood, GrabFood, GoFood atau datang langsung.',
-  themeColor: '#121212',
+  description: 'Warung Nasi Goreng X Starbag Muzar. Buka dari jam 17.00 sampai 01.00. Pesan via ShopeeFood, GrabFood, GoFood atau datang langsung.',
   openGraph: {
     title: 'Muzar Eats — Dari Senja Sampai Pagi',
-    description: 'Nasi goreng anti-mainstream. Buka 16.00–02.00. Klik untuk pesan cepat!',
+    description: 'Nasi goreng anti-mainstream. Buka 17.00–01.00. Klik untuk pesan cepat!',
     type: 'website',
     url: 'https://nasgorxstarbag.example/',
     images: [{ url: 'https://i.imgur.com/1hY6w1B.jpeg' }],
@@ -18,6 +17,11 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
   },
+};
+
+// ✅ Tambahkan export viewport
+export const viewport: Viewport = {
+  themeColor: '#121212',
 };
 
 export default function RootLayout({

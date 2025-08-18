@@ -38,7 +38,7 @@ export function Payment() {
             </DialogHeader>
             <div className="mt-4">
               <Image
-                src="/image/qris.jpg"
+                src="/image/qris.webp"
                 alt="QRIS Payment Code for Nasgor X Starbag Muzar"
                 width={400}
                 height={600}
