@@ -6,14 +6,14 @@ import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
   title: 'Muzar Eats — Dari Senja Sampai Pagi',
-  description: 'Warung Nasi Goreng X Starbag Muzar. Buka dari jam 17.00 sampai 01.00. Pesan via ShopeeFood, GrabFood, GoFood atau datang langsung.',
+  description: 'Warung Nasi Goreng X Starbag Muzar. Buka dari jam 17.00 sampai 01.00. Pesan via ShopeeFood, GrabFood, GoFood atau Datang langsung.',
   openGraph: {
     title: 'Muzar Eats — Dari Senja Sampai Pagi',
     description: 'Nasi goreng anti-mainstream. Buka 17.00–01.00. Klik untuk pesan cepat!',
     themeColor: '#121212',
     type: 'website',
-    url: 'https://nasgorxstarbag.example/',
-    images: [{ url: 'https://i.imgur.com/1hY6w1B.jpeg' }],
+    url: 'https://nasgormuzar.my.id/',
+    images: [{ url: 'https://new.nasgormuzar.my.id/_next/image?url=%2Fimage%2Fnasi%20goreng.webp' }],
   },
   twitter: {
     card: 'summary_large_image',
