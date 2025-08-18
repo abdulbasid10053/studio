@@ -27,7 +27,7 @@ export function OrderDock() {
 
   return (
     <>
-      <audio ref={audioRef} src="https://syaridesign.com/wp-content/uploads/2023/06/ana-jabini.mp3" loop />
+      <audio ref={audioRef} preload="none" src="https://thenonstopradio.com/play?url=https://ic.mari.co.id:8443/jakfm" />
       <aside className="fixed right-4 bottom-4 z-50 flex flex-col items-end gap-2">
         {/* Order Options - Conditionally rendered */}
         {isOrderOpen && (
