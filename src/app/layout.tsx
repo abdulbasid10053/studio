@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Muzar Eats — Dari Senja Sampai Pagi',
     description: 'Nasi goreng anti-mainstream. Buka 17.00–01.00. Klik untuk pesan cepat!',
+    themeColor: '#121212',
     type: 'website',
     url: 'https://nasgorxstarbag.example/',
     images: [{ url: 'https://i.imgur.com/1hY6w1B.jpeg' }],
