@@ -47,7 +47,7 @@ export function HeroClient() {
 
   return (
     <>
-      <div className="inline-flex items-center gap-2.5 bg-card/50 border border-primary/30 py-2 px-3.5 rounded-full backdrop-blur-sm shadow-lg">
+      <div className="inline-flex items-center gap-2.5 bg-card/5 border border-primary/30 py-2 px-3.5 rounded-full backdrop-blur-md">
         <span className="relative flex h-2 w-2">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/75 opacity-75"></span>
           <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>

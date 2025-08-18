@@ -16,13 +16,13 @@ export default function Home() {
       <Hero />
       <main>
         <WhyUs />
-        <Menu />
         <PromoStory />
+        <Menu />
         <AiMenuSuggest />
         <Socials />
-        <Location />
         <Order />
         <Payment />
+        <Location />
       </main>
       <Footer />
       <OrderDock />

@@ -124,7 +124,7 @@ export function Menu() {
     >
       <div className="grid lg:grid-cols-2 gap-8">
         {menuCategories.map((category) => (
-          <Card key={category.category} className="p-6 bg-card border-white/10 shadow-lg flex flex-col">
+          <Card key={category.category} className="p-6 bg-card border-white/10 shadow-lg flex flex-col hover:border-primary/50 transition-colors">
             <div className="flex-grow">
               <div className="flex items-start gap-4 mb-4">
                 <Image

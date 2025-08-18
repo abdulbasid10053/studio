@@ -29,7 +29,7 @@ export function WhyUs() {
     >
       <div className="grid md:grid-cols-3 gap-6">
         {features.map((feature, index) => (
-          <Card key={index} className="bg-card border-white/10 shadow-lg hover:border-primary/50 transition-colors">
+          <Card key={index} className="bg-card border-white/10 shadow-lg hover:border-primary/50 transition-colors cursor-pointer">
             <CardHeader>
               {feature.icon}
               <CardTitle className="pt-2">{feature.title}</CardTitle>

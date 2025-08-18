@@ -12,16 +12,16 @@ export function PromoStory() {
       <div className="grid md:grid-cols-2 gap-8 items-start">
         <div className="space-y-4 text-foreground/80 text-base">
           <p>
-            Bagi kami, ini bukan hanya tentang keuntungan. Ini tentang <strong>persahabatan, solidaritas, dan kepedulian</strong>. Sejak awal, kami ingin membangun tempat di mana semua orang bisa menikmati makanan enak tanpa khawatir soal harga.
+            Berdiri sejak 15 Mei 2025 Nasgor Paling Legend Se-Purworejo Raya. Bagi kami, ini bukan hanya tentang keuntungan. Tapi tentang <strong className="text-primary">Friendship, Solidarity and Caring</strong>. Sejak awal, kami ingin membangun tempat di mana semua orang bisa menikmati makanan enak tanpa khawatir soal harga.
           </p>
           <p>
-            Soal rasa memang selera. Kalau satu menu kurang cocok, jangan ragu coba menu lainnya! Kami punya banyak pilihan selain nasi goreng, seperti bakmi, kwetiau, bihun, hingga capcay. Pasti ada yang pas di lidahmu.
+            Soal rasa memang selera. Kalau satu menu kurang cocok, jangan ragu coba menu lainnya! Kami punya banyak pilihan selain nasi goreng, seperti bakmi, kwetiau, bihun, hingga capcay. Semoga ada yang pas dengan seleramu.
           </p>
           <p className="font-semibold text-foreground">
             Jadi, kapan mau mampir dan jadi bagian dari cerita kami?
           </p>
         </div>
-        <Card className="bg-gradient-to-br from-card to-card/60 border-primary/20 shadow-lg">
+        <Card className="bg-card border-white/10 shadow-lg hover:border-primary/50 transition-colors cursor-pointer">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
               <div className="bg-primary/10 p-3 rounded-full">
