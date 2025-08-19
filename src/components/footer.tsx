@@ -28,7 +28,7 @@ export function Footer() {
         </div>
       </div>
       <p className="mt-8 pt-8 border-t border-white/5 text-sm text-foreground/50">
-        © {year} Muzar Eats (Nasgor X Starbag Muzar).<br /> Build With 😍
+        © {year} Muzar Eats (Nasgor X Starbag Muzar).<br /> Build With ♥️
       </p>
     </footer>
   );
