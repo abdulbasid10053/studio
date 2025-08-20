@@ -12,7 +12,7 @@ export function OrderDock() {
   
   // Set up the audio element only on the client side
   useEffect(() => {
-    audioRef.current = new Audio("https://syaridesign.com/wp-content/uploads/2023/06/ana-jabini.mp3");
+    audioRef.current = new Audio("https://s2.cloudmu.id/listen/prambors/radio.aac");
     audioRef.current.preload = "none"; // Important: prevent preloading
   }, []);
 
