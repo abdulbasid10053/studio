@@ -56,7 +56,7 @@ export function HeroClient() {
       </div>
 
       <h1 className="font-headline font-bold uppercase tracking-wide text-5xl md:text-7xl lg:text-8xl leading-none my-4">
-        Nasgor <span className="text-primary [text-shadow:0_0_18px_theme(colors.primary/0.45)]">X Starbag</span> Muzar
+        Nasgor <span className="text-primary" style={{ textShadow: '0 0 18px hsl(var(--primary) / 0.45)' }}>X Starbag</span> Muzar
       </h1>
 
       <p className="max-w-3xl text-base md:text-lg text-foreground/80">

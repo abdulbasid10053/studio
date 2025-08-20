@@ -14,7 +14,7 @@ const bestSellers = [
     name: "Nasgor Hongkong",
     description: "Topping Jamur, Jagung, Telur Orak Arik dengan cita rasa gurih asin",
     price: "14K",
-    image: "https://i.imgur.com/gY9e5e8.jpeg",
+    image: "/image/nasi goreng.webp",
     aiHint: "hongkong fried rice",
   },
 ];

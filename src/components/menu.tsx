@@ -120,7 +120,7 @@ export function Menu() {
     <Section
       id="menu"
       pill="Menu Lengkap"
-      title="🔥 Favorit sering sold out"
+      title="Semua menu yang wajib dicoba"
     >
       <div className="grid lg:grid-cols-2 gap-8">
         {menuCategories.map((category) => (
