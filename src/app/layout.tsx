@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 export const metadata: Metadata = {
   title: 'Muzar Eats — Dari Senja Sampai Pagi',
   description: 'Warung Nasi Goreng X Starbag Muzar di Purworejo. Buka dari jam 17.00 sampai 01.00. Pesan via ShopeeFood, GrabFood, GoFood atau datang langsung.',
-  keywords: 'nasi goreng purworejo, kuliner purworejo, starbag muzar, nasgor muzar, tempat makan malam purworejo, street food purworejo',
+  keywords: 'nasi goreng purworejo, kuliner purworejo, nasgor x starbag muzar, nasgor muzar, tempat makan malam purworejo, street food purworejo, purworejofoods, jajan purworejo',
   openGraph: {
     title: 'Muzar Eats — Nasi Goreng Anti-Mainstream di Purworejo',
     description: 'Nasi goreng dengan vibe street food modern. Buka 17.00–01.00. Api besar, rasa nendang, porsi jelas. Klik untuk pesan cepat!',
