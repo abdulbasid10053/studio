@@ -1,14 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { ShoppingBag, Bike, Utensils, Clock, Play, Pause, X } from "lucide-react";
 import { Button } from "./ui/button";
 
 export function OrderDock() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isOrderOpen, setIsOrderOpen] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  
+  // Set up the audio element only on the client side
+  useEffect(() => {
+    audioRef.current = new Audio("https://syaridesign.com/wp-content/uploads/2023/06/ana-jabini.mp3");
+    audioRef.current.preload = "none"; // Important: prevent preloading
+  }, []);
+
 
   const togglePlay = () => {
     if (audioRef.current) {
@@ -27,7 +34,7 @@ export function OrderDock() {
 
   return (
     <>
-      <audio ref={audioRef} src="https://thenonstopradio.com/play?url=https://ic.mari.co.id:8443/jakfm" />
+      {/* Audio element is now managed in state and not rendered directly */}
       <aside className="fixed right-4 bottom-4 z-50 flex flex-col items-end gap-2">
         {/* Order Options - Conditionally rendered */}
         {isOrderOpen && (
