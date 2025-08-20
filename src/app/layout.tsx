@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from 'next'; // ✅ Tambahkan Viewport
+import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { Toaster } from "@/components/ui/toaster";
 import './globals.css';
@@ -6,10 +6,11 @@ import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
   title: 'Muzar Eats — Dari Senja Sampai Pagi',
-  description: 'Warung Nasi Goreng X Starbag Muzar. Buka dari jam 17.00 sampai 01.00. Pesan via ShopeeFood, GrabFood, GoFood atau Datang langsung.',
+  description: 'Warung Nasi Goreng X Starbag Muzar di Purworejo. Buka dari jam 17.00 sampai 01.00. Pesan via ShopeeFood, GrabFood, GoFood atau datang langsung.',
+  keywords: 'nasi goreng purworejo, kuliner purworejo, starbag muzar, nasgor muzar, tempat makan malam purworejo, street food purworejo',
   openGraph: {
-    title: 'Muzar Eats — Dari Senja Sampai Pagi',
-    description: 'Nasi goreng anti-mainstream. Buka 17.00–01.00. Klik untuk pesan cepat!',
+    title: 'Muzar Eats — Nasi Goreng Anti-Mainstream di Purworejo',
+    description: 'Nasi goreng dengan vibe street food modern. Buka 17.00–01.00. Api besar, rasa nendang, porsi jelas. Klik untuk pesan cepat!',
     themeColor: '#121212',
     type: 'website',
     url: 'https://nasgormuzar.my.id/',
@@ -20,7 +21,6 @@ export const metadata: Metadata = {
   },
 };
 
-// ✅ Tambahkan export viewport
 export const viewport: Viewport = {
   themeColor: '#121212',
 };
