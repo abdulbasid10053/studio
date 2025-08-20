@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     themeColor: '#121212',
     type: 'website',
     url: 'https://nasgormuzar.my.id/',
-    images: [{ url: 'https://new.nasgormuzar.my.id/_next/image?url=%2Fimage%2Fnasi%20goreng.webp' }],
+    images: [{ url: '/image/nasi goreng.webp' }],
   },
   twitter: {
     card: 'summary_large_image',
