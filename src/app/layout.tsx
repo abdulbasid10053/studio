@@ -3,6 +3,7 @@ import Script from 'next/script';
 import { Toaster } from "@/components/ui/toaster";
 import './globals.css';
 import { cn } from '@/lib/utils';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
   title: 'Muzar Eats — Dari Senja Sampai Pagi',
@@ -40,6 +41,7 @@ export default function RootLayout({
       <body className={cn('font-body antialiased')} suppressHydrationWarning>
         {children}
         <Toaster />
+        <SpeedInsights />
         <Script async src="https://www.tiktok.com/embed.js" />
         <Script async src="https://www.instagram.com/embed.js" />
       </body>
