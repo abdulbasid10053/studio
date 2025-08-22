@@ -1,4 +1,4 @@
-import { AiMenuSuggest } from "@/components/ai-menu-suggest";
+import { RandomMenuPicker } from "@/components/random-menu-picker";
 import { BestSeller } from "@/components/best-seller";
 import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
@@ -24,7 +24,7 @@ export default function Home() {
         <Socials />
         <PromoStory />
         <Location />
-        <AiMenuSuggest />
+        <RandomMenuPicker />
       </main>
       <Footer />
       <OrderDock />
