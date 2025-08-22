@@ -21,10 +21,10 @@ export default function Home() {
         <Menu />
         <Payment />
         <Order />
+        <RandomMenuPicker />
         <Socials />
         <PromoStory />
         <Location />
-        <RandomMenuPicker />
       </main>
       <Footer />
       <OrderDock />

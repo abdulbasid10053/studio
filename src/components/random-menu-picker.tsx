@@ -54,7 +54,7 @@ export function RandomMenuPicker() {
       <Card className="bg-gradient-to-br from-card to-card/60 border-primary/20">
         <CardContent className="p-6 text-center">
           <p className="mb-6 text-foreground/80">
-            Biar takdir yang memilih! Klik tombol di bawah untuk mendapatkan pasangan menu acak.
+            Biarkan takdir yang memilih! Klik tombol di bawah untuk mendapatkan pasangan menu acak.
           </p>
           <Button size="lg" onClick={pickRandomMenu} disabled={isSpinning}>
              <Dices className={`w-5 h-5 mr-2 ${isSpinning ? 'animate-spin' : ''}`} />
