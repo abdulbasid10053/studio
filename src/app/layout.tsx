@@ -42,8 +42,6 @@ export default function RootLayout({
         {children}
         <Toaster />
         <SpeedInsights />
-        <Script async src="https://www.tiktok.com/embed.js" />
-        <Script async src="https://www.instagram.com/embed.js" />
       </body>
     </html>
   );
