@@ -56,39 +56,32 @@ export function CashierClient({ menu }: CashierClientProps) {
   const [itemOptions, setItemOptions] = useState<{ level?: string; temp?: string; }>({});
   const receiptRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  const handleBeforePrint = useCallback(() => {
     const now = new Date();
-    const formattedDate = now.toLocaleDateString("id-ID", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
-    const formattedTime = now.toLocaleTimeString("id-ID", {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
+    const formattedDate = now.toLocaleDateString("id-ID", { day: "2-digit", month: "2-digit", year: "numeric" });
+    const formattedTime = now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
     setReceiptDateTime({ date: formattedDate, time: formattedTime });
-  }, [order]);
+  }, []);
 
   const handlePrint = useReactToPrint({
     content: () => receiptRef.current,
-    documentTitle: "Struk Pesanan",
-    onBeforeGetContent: async () => {
-      const now = new Date();
-      const formattedDate = now.toLocaleDateString("id-ID", { day: "2-digit", month: "2-digit", year: "numeric" });
-      const formattedTime = now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
-      setReceiptDateTime({ date: formattedDate, time: formattedTime });
-      return;
-    },
+    documentTitle: `struk-${Date.now()}`,
+    onBeforeGetContent: handleBeforePrint,
+    onBeforePrint: handleBeforePrint,
   });
+
 
   const generateOrderItemName = (baseName: string, options: { level?: string; temp?: string; }) => {
     let finalName = baseName;
+    const details = [];
     if (options.level) {
-      finalName += ` (${options.level})`;
+      details.push(options.level);
     }
     if (options.temp) {
-      finalName += ` (${options.temp})`;
+      details.push(options.temp);
+    }
+    if (details.length > 0) {
+      finalName += ` (${details.join(', ')})`;
     }
     return finalName;
   };
@@ -166,15 +159,7 @@ export function CashierClient({ menu }: CashierClientProps) {
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col lg:flex-row-reverse">
-      <style jsx global>{`
-        @media print {
-          body * { visibility: hidden; }
-          #receipt-section, #receipt-section * { visibility: visible; }
-          #receipt-section { position: absolute; left: 0; top: 0; width: 100%; }
-        }
-      `}</style>
-      
-      <div className="hidden">
+      <div style={{ display: "none" }}>
         <Receipt ref={receiptRef} order={order} total={total} dateTime={receiptDateTime} />
       </div>
 
@@ -199,7 +184,7 @@ export function CashierClient({ menu }: CashierClientProps) {
               </div>
             )}
             {selectedItem && selectedItem.category === drinkCategory && (
-              <div className="space-y-2">
+              <div className="space-y-2 mt-4">
                 <h4 className="font-medium">Suhu Minuman</h4>
                  <RadioGroup value={itemOptions.temp} onValueChange={(value) => setItemOptions(prev => ({...prev, temp: value}))}>
                    {temperatureLevels.map(temp => (
@@ -308,5 +293,3 @@ export function CashierClient({ menu }: CashierClientProps) {
     </div>
   );
 }
-
-    
