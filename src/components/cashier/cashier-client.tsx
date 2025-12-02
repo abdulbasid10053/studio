@@ -51,25 +51,34 @@ const temperatureLevels = ["Es", "Hangat", "Panas"];
 
 export function CashierClient({ menu }: CashierClientProps) {
   const [order, setOrder] = useState<OrderItem[]>([]);
-  const [receiptDateTime, setReceiptDateTime] = useState({ date: "", time: "" });
+  const [receiptDateTime, setReceiptDateTime] = useState<{ date: string; time: string } | null>(null);
   const [selectedItem, setSelectedItem] = useState<{ item: MenuItem; category: string; } | null>(null);
   const [itemOptions, setItemOptions] = useState<{ level?: string; temp?: string; }>({});
+  const [isPrinting, setIsPrinting] = useState(false);
   const receiptRef = useRef<HTMLDivElement>(null);
 
-  const handleBeforePrint = useCallback(() => {
+  useEffect(() => {
+    if (isPrinting && receiptDateTime) {
+      handlePrint();
+    }
+  }, [isPrinting, receiptDateTime]);
+
+  const handlePrintTrigger = () => {
     const now = new Date();
     const formattedDate = now.toLocaleDateString("id-ID", { day: "2-digit", month: "2-digit", year: "numeric" });
     const formattedTime = now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
     setReceiptDateTime({ date: formattedDate, time: formattedTime });
-  }, []);
+    setIsPrinting(true);
+  };
 
   const handlePrint = useReactToPrint({
     content: () => receiptRef.current,
     documentTitle: `struk-${Date.now()}`,
-    onBeforeGetContent: handleBeforePrint,
-    onBeforePrint: handleBeforePrint,
+    onAfterPrint: () => {
+      setIsPrinting(false);
+      setReceiptDateTime(null);
+    },
   });
-
 
   const generateOrderItemName = (baseName: string, options: { level?: string; temp?: string; }) => {
     let finalName = baseName;
@@ -127,7 +136,6 @@ export function CashierClient({ menu }: CashierClientProps) {
     }
   };
 
-
   const incrementOrder = (itemName: string) => {
      setOrder((currentOrder) => {
       return currentOrder.map((i) =>
@@ -160,7 +168,7 @@ export function CashierClient({ menu }: CashierClientProps) {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col lg:flex-row-reverse">
       <div style={{ display: "none" }}>
-        <Receipt ref={receiptRef} order={order} total={total} dateTime={receiptDateTime} />
+        {receiptDateTime && <Receipt ref={receiptRef} order={order} total={total} dateTime={receiptDateTime} />}
       </div>
 
       {/* Options Dialog */}
@@ -249,7 +257,7 @@ export function CashierClient({ menu }: CashierClientProps) {
                 <span>Total</span>
                 <span>Rp {total.toLocaleString("id-ID")}</span>
               </div>
-              <Button size="lg" className="w-full font-bold" onClick={handlePrint}>
+              <Button size="lg" className="w-full font-bold" onClick={handlePrintTrigger}>
                 <Printer className="w-5 h-5 mr-2" />
                 Cetak Struk
               </Button>
