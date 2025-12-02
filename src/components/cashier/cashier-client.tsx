@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Receipt } from "./receipt";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -56,6 +56,7 @@ export function CashierClient({ menu }: CashierClientProps) {
   const [receiptDateTime, setReceiptDateTime] = useState<{ date: string; time: string } | null>(null);
   const [selectedItem, setSelectedItem] = useState<{ item: MenuItem; category: string; } | null>(null);
   const [itemOptions, setItemOptions] = useState<{ level?: string; temp?: string; }>({});
+  const receiptRef = useRef<HTMLDivElement>(null);
   
   const handlePrint = () => {
     const now = new Date();
@@ -63,10 +64,8 @@ export function CashierClient({ menu }: CashierClientProps) {
     const formattedTime = now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
     setReceiptDateTime({ date: formattedDate, time: formattedTime });
 
-    // Allow state to update before printing
     setTimeout(() => {
       window.print();
-      setReceiptDateTime(null);
     }, 100);
   };
 
@@ -158,8 +157,8 @@ export function CashierClient({ menu }: CashierClientProps) {
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col lg:flex-row-reverse">
-      <div className="receipt-print">
-        {receiptDateTime && <Receipt order={order} total={total} dateTime={receiptDateTime} />}
+      <div className="receipt-print" style={{ display: "none" }}>
+        {receiptDateTime && <Receipt ref={receiptRef} order={order} total={total} dateTime={receiptDateTime} />}
       </div>
 
       {/* Options Dialog */}

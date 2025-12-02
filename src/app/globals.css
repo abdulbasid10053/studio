@@ -61,13 +61,13 @@
 }
 
 @media print {
-  body * {
+  body.printing * {
     visibility: hidden;
   }
-  .receipt-print, .receipt-print * {
+  body.printing .receipt-print, body.printing .receipt-print * {
     visibility: visible;
   }
-  .receipt-print {
+  body.printing .receipt-print {
     position: absolute;
     left: 0;
     top: 0;
