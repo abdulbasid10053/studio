@@ -28,9 +28,9 @@ export function Footer() {
           </ul>
         </div>
         <div>
-            <h3 className="font-headline font-bold text-lg mb-2 text-foreground">Untuk Staf</h3>
+            <h3 className="font-headline font-bold text-lg mb-2 text-foreground">Pesan Makanan</h3>
             <ul className="space-y-1">
-                <li><Link href="/cashier" className="hover:text-primary transition-colors">Halaman Kasir</Link></li>
+                <li><Link href="/cashier" className="hover:text-primary transition-colors">Halaman Order</Link></li>
             </ul>
         </div>
       </div>
