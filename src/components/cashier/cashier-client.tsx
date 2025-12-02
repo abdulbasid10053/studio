@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { useReactToPrint } from "react-to-print";
 import { Receipt } from "./receipt";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -57,24 +56,20 @@ export function CashierClient({ menu }: CashierClientProps) {
   const [receiptDateTime, setReceiptDateTime] = useState<{ date: string; time: string } | null>(null);
   const [selectedItem, setSelectedItem] = useState<{ item: MenuItem; category: string; } | null>(null);
   const [itemOptions, setItemOptions] = useState<{ level?: string; temp?: string; }>({});
-  const receiptRef = useRef<HTMLDivElement>(null);
+  
+  const handlePrint = () => {
+    const now = new Date();
+    const formattedDate = now.toLocaleDateString("id-ID", { day: "2-digit", month: "2-digit", year: "numeric" });
+    const formattedTime = now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
+    setReceiptDateTime({ date: formattedDate, time: formattedTime });
 
-  const handlePrint = useReactToPrint({
-    content: () => receiptRef.current,
-    documentTitle: `struk-${Date.now()}`,
-    onBeforeGetContent: () => {
-      return new Promise<void>((resolve) => {
-        const now = new Date();
-        const formattedDate = now.toLocaleDateString("id-ID", { day: "2-digit", month: "2-digit", year: "numeric" });
-        const formattedTime = now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
-        setReceiptDateTime({ date: formattedDate, time: formattedTime });
-        resolve();
-      });
-    },
-    onAfterPrint: () => {
+    // Allow state to update before printing
+    setTimeout(() => {
+      window.print();
       setReceiptDateTime(null);
-    },
-  });
+    }, 100);
+  };
+
 
   const generateOrderItemName = (baseName: string, options: { level?: string; temp?: string; }) => {
     let finalName = baseName;
@@ -163,8 +158,8 @@ export function CashierClient({ menu }: CashierClientProps) {
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col lg:flex-row-reverse">
-      <div style={{ display: "none" }}>
-        {receiptDateTime && <Receipt ref={receiptRef} order={order} total={total} dateTime={receiptDateTime} />}
+      <div className="receipt-print">
+        {receiptDateTime && <Receipt order={order} total={total} dateTime={receiptDateTime} />}
       </div>
 
       {/* Options Dialog */}
@@ -253,10 +248,10 @@ export function CashierClient({ menu }: CashierClientProps) {
                 <span>Total</span>
                 <span>Rp {total.toLocaleString("id-ID")}</span>
               </div>
-              <button onClick={handlePrint} className={cn(buttonVariants({ size: "lg" }), "w-full font-bold")}>
+              <Button onClick={handlePrint} size="lg" className="w-full font-bold">
                 <Printer className="w-5 h-5 mr-2" />
                 Cetak Struk
-              </button>
+              </Button>
             </div>
           )}
         </Card>
