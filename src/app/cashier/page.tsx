@@ -1,5 +1,5 @@
 import { CashierClient } from "@/components/cashier/cashier-client";
-import { menuCategories } from "@/components/menu";
+import { menuCategories } from "@/components/menu.ts";
 
 export default function CashierPage() {
   return (
