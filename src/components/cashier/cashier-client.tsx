@@ -65,7 +65,9 @@ export function CashierClient({ menu }: CashierClientProps) {
     setReceiptDateTime({ date: formattedDate, time: formattedTime });
 
     setTimeout(() => {
+      document.body.classList.add("printing");
       window.print();
+      document.body.classList.remove("printing");
     }, 100);
   };
 
@@ -156,7 +158,7 @@ export function CashierClient({ menu }: CashierClientProps) {
   );
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col lg:flex-row-reverse">
+    <div className="min-h-screen bg-background text-foreground flex flex-col lg:flex-row-reverse print-container">
       <div className="receipt-print" style={{ display: "none" }}>
         {receiptDateTime && <Receipt ref={receiptRef} order={order} total={total} dateTime={receiptDateTime} />}
       </div>
@@ -203,7 +205,7 @@ export function CashierClient({ menu }: CashierClientProps) {
       </Dialog>
 
       {/* Right Sidebar: Order Details */}
-      <div className="w-full lg:w-1/3 xl:w-1/4 p-4 flex flex-col h-screen">
+      <div className="w-full lg:w-1/3 xl:w-1/4 p-4 flex flex-col h-screen no-print">
         <Card className="flex-grow flex flex-col border-white/10">
           <CardHeader className="flex-row items-center justify-between">
             <CardTitle>Pesanan</CardTitle>
@@ -257,7 +259,7 @@ export function CashierClient({ menu }: CashierClientProps) {
       </div>
 
       {/* Left Side: Menu */}
-      <div className="flex-grow p-4 h-screen flex flex-col">
+      <div className="flex-grow p-4 h-screen flex flex-col no-print">
         <header className="flex items-center justify-between mb-4">
           <h1 className="font-headline text-3xl font-bold text-primary">Kasir</h1>
           <Button asChild variant="outline">

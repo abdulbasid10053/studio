@@ -61,16 +61,10 @@
 }
 
 @media print {
-  body.printing * {
-    visibility: hidden;
-  }
-  body.printing .receipt-print, body.printing .receipt-print * {
-    visibility: visible;
+  body.printing .no-print {
+    display: none;
   }
   body.printing .receipt-print {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
+    display: block !important;
   }
 }
