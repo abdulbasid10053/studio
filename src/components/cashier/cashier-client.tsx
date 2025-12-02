@@ -54,28 +54,21 @@ export function CashierClient({ menu }: CashierClientProps) {
   const [receiptDateTime, setReceiptDateTime] = useState<{ date: string; time: string } | null>(null);
   const [selectedItem, setSelectedItem] = useState<{ item: MenuItem; category: string; } | null>(null);
   const [itemOptions, setItemOptions] = useState<{ level?: string; temp?: string; }>({});
-  const [isPrinting, setIsPrinting] = useState(false);
   const receiptRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (isPrinting && receiptDateTime) {
-      handlePrint();
-    }
-  }, [isPrinting, receiptDateTime]);
-
-  const handlePrintTrigger = () => {
-    const now = new Date();
-    const formattedDate = now.toLocaleDateString("id-ID", { day: "2-digit", month: "2-digit", year: "numeric" });
-    const formattedTime = now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
-    setReceiptDateTime({ date: formattedDate, time: formattedTime });
-    setIsPrinting(true);
-  };
 
   const handlePrint = useReactToPrint({
     content: () => receiptRef.current,
     documentTitle: `struk-${Date.now()}`,
+    onBeforeGetContent: () => {
+      return new Promise<void>((resolve) => {
+        const now = new Date();
+        const formattedDate = now.toLocaleDateString("id-ID", { day: "2-digit", month: "2-digit", year: "numeric" });
+        const formattedTime = now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
+        setReceiptDateTime({ date: formattedDate, time: formattedTime });
+        resolve();
+      });
+    },
     onAfterPrint: () => {
-      setIsPrinting(false);
       setReceiptDateTime(null);
     },
   });
@@ -257,7 +250,7 @@ export function CashierClient({ menu }: CashierClientProps) {
                 <span>Total</span>
                 <span>Rp {total.toLocaleString("id-ID")}</span>
               </div>
-              <Button size="lg" className="w-full font-bold" onClick={handlePrintTrigger}>
+              <Button size="lg" className="w-full font-bold" onClick={handlePrint}>
                 <Printer className="w-5 h-5 mr-2" />
                 Cetak Struk
               </Button>
