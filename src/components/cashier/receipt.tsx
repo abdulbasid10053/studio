@@ -23,7 +23,7 @@ export const Receipt = React.forwardRef<HTMLDivElement, ReceiptProps>(({ order, 
   if (!dateTime) return null;
 
   return (
-    <div ref={ref} className="p-1 text-black bg-white" style={{ width: '58mm', fontFamily: 'monospace', fontSize: '12px' }}>
+    <div ref={ref} className="p-1 text-black bg-white" style={{ width: '58mm', fontFamily: 'monospace', fontSize: '10px', boxSizing: 'content-box' }}>
       <div className="text-center">
         <h1 className="font-bold text-base">NASGOR X STARBAG MUZAR</h1>
         <p>Jl. KHA Dahlan No.7, Purworejo</p>
