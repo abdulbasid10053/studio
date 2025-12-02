@@ -17,6 +17,9 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Trash2, Plus, Minus, Printer, X } from "lucide-react";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+
 
 interface MenuItem {
   name: string;
@@ -250,10 +253,10 @@ export function CashierClient({ menu }: CashierClientProps) {
                 <span>Total</span>
                 <span>Rp {total.toLocaleString("id-ID")}</span>
               </div>
-              <Button size="lg" className="w-full font-bold" onClick={handlePrint}>
+              <button onClick={handlePrint} className={cn(buttonVariants({ size: "lg" }), "w-full font-bold")}>
                 <Printer className="w-5 h-5 mr-2" />
                 Cetak Struk
-              </Button>
+              </button>
             </div>
           )}
         </Card>
