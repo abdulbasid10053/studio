@@ -72,7 +72,12 @@ export function CashierClient({ menu }: CashierClientProps) {
   });
 
   const addToOrder = (item: MenuItem, categoryName: string) => {
-    const fullName = `${item.name} (${categoryName})`;
+    // Handle categories that shouldn't be prefixed (like "Topping" or "Minuman")
+    const noPrefixCategories = ['Topping', 'Minuman'];
+    const fullName = noPrefixCategories.includes(categoryName)
+      ? item.name
+      : `${categoryName} ${item.name}`;
+
     setOrder((currentOrder) => {
       const existingItem = currentOrder.find((i) => i.name === fullName);
       if (existingItem) {
@@ -173,7 +178,28 @@ export function CashierClient({ menu }: CashierClientProps) {
                           size="icon"
                           variant="outline"
                           className="w-7 h-7"
-                          onClick={() => addToOrder(item, '')}
+                          onClick={() => {
+                            // We need to find the original category to add the same item again
+                            const originalCategory = menu.find(cat => 
+                              cat.items.some(menuItem => {
+                                const fullName = cat.category === 'Topping' || cat.category === 'Minuman'
+                                  ? menuItem.name
+                                  : `${cat.category} ${menuItem.name}`;
+                                return fullName === item.name;
+                              })
+                            );
+                            if(originalCategory) {
+                               const originalItem = originalCategory.items.find(menuItem => {
+                                const fullName = originalCategory.category === 'Topping' || originalCategory.category === 'Minuman'
+                                  ? menuItem.name
+                                  : `${originalCategory.category} ${menuItem.name}`;
+                                return fullName === item.name;
+                               });
+                               if (originalItem) {
+                                 addToOrder(originalItem, originalCategory.category)
+                               }
+                            }
+                          }}
                         >
                           <Plus className="w-4 h-4" />
                         </Button>
