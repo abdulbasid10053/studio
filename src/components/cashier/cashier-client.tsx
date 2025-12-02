@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useReactToPrint } from "react-to-print";
 import { Receipt } from "./receipt";
 import { Button } from "@/components/ui/button";
@@ -34,14 +34,40 @@ const parsePrice = (price: string) => {
 
 export function CashierClient({ menu }: CashierClientProps) {
   const [order, setOrder] = useState<OrderItem[]>([]);
+  const [receiptDateTime, setReceiptDateTime] = useState({ date: '', time: '' });
   const receiptRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // This effect runs only on the client, preventing hydration mismatch.
+    const now = new Date();
+    const formattedDate = now.toLocaleDateString("id-ID", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+    const formattedTime = now.toLocaleTimeString("id-ID", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    setReceiptDateTime({ date: formattedDate, time: formattedTime });
+  }, [order]); // Re-calculate date/time when order changes or for initial load
 
   const handlePrint = useReactToPrint({
     content: () => receiptRef.current,
     documentTitle: "Struk Pesanan",
-    onAfterPrint: () => {
-      // Optional: Clear order after printing
-      // setOrder([]);
+    onBeforeGetContent: async () => {
+      const now = new Date();
+      const formattedDate = now.toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      });
+      const formattedTime = now.toLocaleTimeString("id-ID", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      setReceiptDateTime({ date: formattedDate, time: formattedTime });
+      return;
     },
   });
 
@@ -100,7 +126,7 @@ export function CashierClient({ menu }: CashierClientProps) {
       
       {/* Hidden Receipt for printing */}
       <div className="hidden">
-        <Receipt ref={receiptRef} order={order} total={total} />
+        <Receipt ref={receiptRef} order={order} total={total} dateTime={receiptDateTime} />
       </div>
 
       {/* Right Sidebar: Order Details */}

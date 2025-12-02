@@ -12,6 +12,7 @@ interface OrderItem extends MenuItem {
 interface ReceiptProps {
   order: OrderItem[];
   total: number;
+  dateTime: { date: string; time: string };
 }
 
 const parsePrice = (price: string) => {
@@ -20,18 +21,7 @@ const parsePrice = (price: string) => {
 
 // forwardRef is important for useReactToPrint
 export const Receipt = React.forwardRef<HTMLDivElement, ReceiptProps>(
-  ({ order, total }, ref) => {
-    const now = new Date();
-    const formattedDate = now.toLocaleDateString("id-ID", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
-    const formattedTime = now.toLocaleTimeString("id-ID", {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-
+  ({ order, total, dateTime }, ref) => {
     return (
       <div ref={ref} id="receipt-section" className="p-2 text-black bg-white" style={{ width: '288px', fontFamily: 'monospace', fontSize: '12px' }}>
         <div className="text-center">
@@ -40,8 +30,8 @@ export const Receipt = React.forwardRef<HTMLDivElement, ReceiptProps>(
           <p>--------------------------------</p>
         </div>
         <div className="flex justify-between">
-            <p>Tgl: {formattedDate}</p>
-            <p>Jam: {formattedTime}</p>
+            <p>Tgl: {dateTime.date}</p>
+            <p>Jam: {dateTime.time}</p>
         </div>
         <p>--------------------------------</p>
         <div>
