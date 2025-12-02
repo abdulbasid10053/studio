@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { Receipt } from "./receipt";
 import { Button } from "@/components/ui/button";
