@@ -19,10 +19,12 @@ const parsePrice = (price: string) => {
   return parseInt(price.replace("K", "000"));
 };
 
-export const Receipt = React.forwardRef<HTMLDivElement, ReceiptProps>(
-  ({ order, total, dateTime }, ref) => {
+export class Receipt extends React.Component<ReceiptProps> {
+  render() {
+    const { order, total, dateTime } = this.props;
+
     return (
-      <div ref={ref} className="p-2 text-black bg-white" style={{ width: '288px', fontFamily: 'monospace', fontSize: '12px' }}>
+      <div className="p-2 text-black bg-white" style={{ width: '288px', fontFamily: 'monospace', fontSize: '12px' }}>
         <div className="text-center">
           <h1 className="font-bold text-base">NASGOR X STARBAG MUZAR</h1>
           <p>Jl. KHA Dahlan No.7, Purworejo</p>
@@ -64,6 +66,4 @@ export const Receipt = React.forwardRef<HTMLDivElement, ReceiptProps>(
       </div>
     );
   }
-);
-
-Receipt.displayName = "Receipt";
+}
