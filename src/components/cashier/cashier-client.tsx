@@ -71,15 +71,16 @@ export function CashierClient({ menu }: CashierClientProps) {
     },
   });
 
-  const addToOrder = (item: MenuItem) => {
+  const addToOrder = (item: MenuItem, categoryName: string) => {
+    const fullName = `${item.name} (${categoryName})`;
     setOrder((currentOrder) => {
-      const existingItem = currentOrder.find((i) => i.name === item.name);
+      const existingItem = currentOrder.find((i) => i.name === fullName);
       if (existingItem) {
         return currentOrder.map((i) =>
-          i.name === item.name ? { ...i, quantity: i.quantity + 1 } : i
+          i.name === fullName ? { ...i, quantity: i.quantity + 1 } : i
         );
       }
-      return [...currentOrder, { ...item, quantity: 1 }];
+      return [...currentOrder, { ...item, name: fullName, quantity: 1 }];
     });
   };
 
@@ -172,7 +173,7 @@ export function CashierClient({ menu }: CashierClientProps) {
                           size="icon"
                           variant="outline"
                           className="w-7 h-7"
-                          onClick={() => addToOrder(item)}
+                          onClick={() => addToOrder(item, '')}
                         >
                           <Plus className="w-4 h-4" />
                         </Button>
@@ -227,7 +228,7 @@ export function CashierClient({ menu }: CashierClientProps) {
                   {category.items.map((item) => (
                     <Card
                       key={item.name}
-                      onClick={() => addToOrder(item)}
+                      onClick={() => addToOrder(item, category.category)}
                       className="bg-card border-white/10 shadow-sm hover:bg-accent/20 hover:border-primary/50 transition-all duration-200 transform hover:-translate-y-1 cursor-pointer"
                     >
                       <CardContent className="p-4">
