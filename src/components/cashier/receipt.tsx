@@ -23,7 +23,7 @@ export const Receipt: React.FC<ReceiptProps> = ({ order, total, dateTime }) => {
   if (!dateTime) return null;
 
   return (
-    <div className="p-2 text-black bg-white" style={{ width: '288px', fontFamily: 'monospace', fontSize: '12px' }}>
+    <div className="p-1 text-black bg-white" style={{ width: '58mm', fontFamily: 'monospace', fontSize: '12px' }}>
       <div className="text-center">
         <h1 className="font-bold text-base">NASGOR X STARBAG MUZAR</h1>
         <p>Jl. KHA Dahlan No.7, Purworejo</p>
