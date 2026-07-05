@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { getMenuFromFirestore, saveMenuToFirestore, MenuCategory } from "@/lib/menu-service";
+import { getFeedbackFromFirestore, deleteFeedbackFromFirestore, FeedbackData } from "@/lib/feedback-service";
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "muzar2024";
 const AUTH_COOKIE = "admin_auth";
@@ -43,5 +44,20 @@ export async function saveMenuData(categories: MenuCategory[]): Promise<{ succes
   } catch (error) {
     console.error("Error saving menu:", error);
     return { success: false, error: "Gagal menyimpan menu." };
+  }
+}
+
+export async function getFeedbackData(): Promise<FeedbackData[]> {
+  return getFeedbackFromFirestore();
+}
+
+export async function deleteFeedbackAction(id: string): Promise<{ success: boolean; error?: string }> {
+  try {
+    await deleteFeedbackFromFirestore(id);
+    revalidatePath("/admin/dashboard");
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting feedback:", error);
+    return { success: false, error: "Gagal menghapus feedback." };
   }
 }

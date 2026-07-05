@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { checkAdminAuth, getMenuData } from "@/app/admin/actions";
+import { checkAdminAuth, getMenuData, getFeedbackData } from "@/app/admin/actions";
 import { DashboardClient } from "./dashboard-client";
 
 export default async function DashboardPage() {
@@ -8,7 +8,11 @@ export default async function DashboardPage() {
     redirect("/admin");
   }
 
-  const menuData = await getMenuData();
+  const [menuData, feedbackData] = await Promise.all([
+    getMenuData(),
+    getFeedbackData()
+  ]);
 
-  return <DashboardClient initialMenu={menuData} />;
+  return <DashboardClient initialMenu={menuData} initialFeedback={feedbackData} />;
 }
+

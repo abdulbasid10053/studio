@@ -1,23 +1,34 @@
 "use server";
 
+import { saveFeedbackToFirestore } from "@/lib/feedback-service";
+
 export async function sendFeedbackToTelegram(data: {
   feedback: string;
   name: string;
   isAnonymous: boolean;
   isPublishable: boolean;
 }) {
+  // 1. Simpan ke Firestore untuk ditampilkan di Dashboard Admin
+  await saveFeedbackToFirestore({
+    feedback: data.feedback,
+    name: data.name,
+    isAnonymous: data.isAnonymous,
+    isPublishable: data.isPublishable,
+  });
+
+  // 2. Lanjut mengirim notifikasi Telegram
   const botToken = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
 
   if (!botToken || !chatId) {
     console.error("TELEGRAM_BOT_TOKEN atau TELEGRAM_CHAT_ID belum diatur di .env");
-    return { success: false, error: "Konfigurasi server belum lengkap." };
+    return { success: false, error: "Konfigurasi server belum lengkap. (Tetap tersimpan di database)" };
   }
 
   // Format pesan
   const senderName = data.isAnonymous ? "Anonim" : (data.name.trim() ? data.name : "Tanpa Nama");
   const publishStatus = data.isPublishable ? "✅ Boleh dipublish" : "❌ Tidak untuk dipublish";
-  
+
   const text = `
 📩 *Feedback Baru Muzar Eats*
 ========================
