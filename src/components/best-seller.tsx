@@ -6,14 +6,14 @@ const bestSellers = [
   {
     name: "Nasgor Spesial",
     description: "Topping Ayam, Sosis, Bakso, Telur Dadar & Ceplok",
-    price: "18K",
+    price: "20K",
     image: "/image/nasi goreng.webp",
     aiHint: "special fried rice",
   },
   {
     name: "Nasgor Hongkong",
     description: "Topping Jamur, Jagung, Telur Orak Arik dengan cita rasa gurih asin",
-    price: "14K",
+    price: "16K",
     image: "/image/nasi goreng.webp",
     aiHint: "hongkong fried rice",
   },
