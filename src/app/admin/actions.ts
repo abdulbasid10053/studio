@@ -1,6 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
 import { getMenuFromFirestore, saveMenuToFirestore, MenuCategory } from "@/lib/menu-service";
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "muzar2024";
@@ -37,6 +38,7 @@ export async function getMenuData(): Promise<MenuCategory[]> {
 export async function saveMenuData(categories: MenuCategory[]): Promise<{ success: boolean; error?: string }> {
   try {
     await saveMenuToFirestore(categories);
+    revalidatePath("/"); // Hapus cache halaman utama
     return { success: true };
   } catch (error) {
     console.error("Error saving menu:", error);
