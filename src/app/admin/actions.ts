@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { getMenuFromFirestore, saveMenuToFirestore, MenuCategory } from "@/lib/menu-service";
-import { getFeedbackFromFirestore, deleteFeedbackFromFirestore, FeedbackData } from "@/lib/feedback-service";
+import { getFeedbackFromFirestore, deleteFeedbackFromFirestore, FeedbackData, toggleFeedbackApproval } from "@/lib/feedback-service";
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "muzar2024";
 const AUTH_COOKIE = "admin_auth";
@@ -55,9 +55,23 @@ export async function deleteFeedbackAction(id: string): Promise<{ success: boole
   try {
     await deleteFeedbackFromFirestore(id);
     revalidatePath("/admin/dashboard");
+    revalidatePath("/"); // Hapus dari halaman utama juga jika dipublish
     return { success: true };
   } catch (error) {
     console.error("Error deleting feedback:", error);
     return { success: false, error: "Gagal menghapus feedback." };
   }
 }
+
+export async function toggleFeedbackApprovalAction(id: string, isApproved: boolean): Promise<{ success: boolean; error?: string }> {
+  try {
+    await toggleFeedbackApproval(id, isApproved);
+    revalidatePath("/admin/dashboard");
+    revalidatePath("/");
+    return { success: true };
+  } catch (error) {
+    console.error("Error toggling feedback approval:", error);
+    return { success: false, error: "Gagal memperbarui status publikasi." };
+  }
+}
+

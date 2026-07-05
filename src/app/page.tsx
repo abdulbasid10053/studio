@@ -10,6 +10,7 @@ import { Payment } from "@/components/payment";
 import { PromoStory } from "@/components/promo-story";
 import { Socials } from "@/components/socials";
 import { WhyUs } from "@/components/why-us";
+import { FeedbackShowcase } from "@/components/feedback-showcase";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
         <RandomMenuPicker />
         <Socials />
         <PromoStory />
+        <FeedbackShowcase />
         <Location />
       </main>
       <Footer />

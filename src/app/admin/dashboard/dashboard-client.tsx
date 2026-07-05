@@ -2,11 +2,11 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { saveMenuData, logoutAdmin, deleteFeedbackAction } from "@/app/admin/actions";
+import { saveMenuData, logoutAdmin, deleteFeedbackAction, toggleFeedbackApprovalAction } from "@/app/admin/actions";
 import { FeedbackData } from "@/lib/feedback-service";
 import {
   ChefHat, Plus, Trash2, Edit2, Save, LogOut, X,
-  Check, Package, Loader2, ChevronDown, ChevronUp, GripVertical, MessageSquare, AlertCircle, Clock
+  Check, Package, Loader2, ChevronDown, ChevronUp, GripVertical, MessageSquare, AlertCircle, Clock, Eye, EyeOff
 } from "lucide-react";
 
 interface MenuItem {
@@ -127,6 +127,13 @@ export function DashboardClient({ initialMenu, initialFeedback }: Props) {
     if (!confirm("Hapus feedback ini secara permanen?")) return;
     startTransition(async () => {
       await deleteFeedbackAction(id);
+      router.refresh();
+    });
+  };
+
+  const handleToggleApproval = (id: string, currentApproved: boolean) => {
+    startTransition(async () => {
+      await toggleFeedbackApprovalAction(id, !currentApproved);
       router.refresh();
     });
   };
@@ -445,8 +452,8 @@ export function DashboardClient({ initialMenu, initialFeedback }: Props) {
               <div className="grid gap-4">
                 {initialFeedback.map((fb) => (
                   <div key={fb.id} className="bg-zinc-900 border border-white/10 rounded-2xl p-5 relative group overflow-hidden">
-                    {/* Background glow for publishable */}
-                    {fb.isPublishable && (
+                    {/* Background glow for publishable & approved */}
+                    {fb.isPublishable && fb.isApproved && (
                       <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 blur-3xl -z-0 rounded-full" />
                     )}
                     
@@ -456,9 +463,15 @@ export function DashboardClient({ initialMenu, initialFeedback }: Props) {
                           <h3 className="font-semibold text-white flex items-center gap-2">
                             {fb.isAnonymous ? "👤 Anonim" : `👤 ${fb.name || "Tanpa Nama"}`}
                             {fb.isPublishable ? (
-                              <span className="text-[10px] uppercase font-bold tracking-wider bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full">
-                                Publik
-                              </span>
+                              fb.isApproved ? (
+                                <span className="text-[10px] uppercase font-bold tracking-wider bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full">
+                                  Publik (Aktif)
+                                </span>
+                              ) : (
+                                <span className="text-[10px] uppercase font-bold tracking-wider bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-full">
+                                  Menunggu Persetujuan
+                                </span>
+                              )
                             ) : (
                               <span className="text-[10px] uppercase font-bold tracking-wider bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded-full">
                                 Privat
@@ -486,6 +499,32 @@ export function DashboardClient({ initialMenu, initialFeedback }: Props) {
                       <div className="bg-black/30 border border-white/5 rounded-xl p-4 mt-2 text-sm text-zinc-300 whitespace-pre-wrap leading-relaxed">
                         {fb.feedback}
                       </div>
+
+                      {/* Approval Toggle */}
+                      {fb.isPublishable ? (
+                        <div className="flex items-center justify-between mt-4 pt-3 border-t border-white/5">
+                          <span className="text-xs text-zinc-500">Tampilkan di halaman utama</span>
+                          <button
+                            onClick={() => fb.id && handleToggleApproval(fb.id, fb.isApproved || false)}
+                            disabled={isPending}
+                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                              fb.isApproved
+                                ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20"
+                                : "bg-zinc-800 text-zinc-400 border border-white/5 hover:bg-zinc-700 hover:text-white"
+                            }`}
+                          >
+                            {fb.isApproved ? (
+                              <><Eye className="w-3.5 h-3.5" /> Tampil</>
+                            ) : (
+                              <><EyeOff className="w-3.5 h-3.5" /> Sembunyikan</>
+                            )}
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-between mt-4 pt-3 border-t border-white/5 text-xs text-zinc-600 italic">
+                          <span>Tidak dapat dipublikasikan (permintaan pelanggan)</span>
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}

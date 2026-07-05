@@ -14,6 +14,7 @@ export async function sendFeedbackToTelegram(data: {
     name: data.name,
     isAnonymous: data.isAnonymous,
     isPublishable: data.isPublishable,
+    isApproved: false, // Default tidak tampil sampai di-approve admin
   });
 
   // 2. Lanjut mengirim notifikasi Telegram
