@@ -56,7 +56,7 @@ export default function FeedbackPage() {
 
   return (
     <div className="min-h-screen bg-black/95 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-zinc-900 via-black to-black flex items-center justify-center p-4 py-12 md:p-8">
-      <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] pointer-events-none mix-blend-overlay"></div>
+
 
       <div className="w-full max-w-xl relative z-10 animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
         {/* Back Button */}
