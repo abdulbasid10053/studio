@@ -1,9 +1,11 @@
 import Image from "next/image";
 import { Card } from "./ui/card";
 import { Section } from "./section";
-import { menuCategories } from "./menu.ts";
+import { getMenuFromFirestore } from "@/lib/menu-service";
 
-export function Menu() {
+export async function Menu() {
+  const menuCategories = await getMenuFromFirestore();
+
   return (
     <Section
       id="menu"
@@ -42,7 +44,7 @@ export function Menu() {
         ))}
       </div>
       <p className="text-foreground/60 mt-6 text-sm text-center">
-        Harga & daftar lengkap mengikuti platform pesan online (ShopeeFood/GrabFood/GoFood).
+        Harga &amp; daftar lengkap mengikuti platform pesan online (ShopeeFood/GrabFood/GoFood).
       </p>
     </Section>
   );
