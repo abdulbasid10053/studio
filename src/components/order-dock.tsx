@@ -6,16 +6,27 @@ import { ShoppingBag, Bike, Utensils, Clock, Play, Pause, X } from "lucide-react
 import { Button } from "./ui/button";
 import { ThemeToggle } from "./theme-toggle";
 
-export function OrderDock() {
+interface OrderDockProps {
+  musicUrl?: string;
+}
+
+export function OrderDock({ musicUrl = "https://s2.cloudmu.id/listen/prambors/radio.aac" }: OrderDockProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isOrderOpen, setIsOrderOpen] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   
   // Set up the audio element only on the client side
   useEffect(() => {
-    audioRef.current = new Audio("https://s2.cloudmu.id/listen/prambors/radio.aac");
+    const wasPlaying = isPlaying;
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
+    audioRef.current = new Audio(musicUrl);
     audioRef.current.preload = "none"; // Important: prevent preloading
-  }, []);
+    if (wasPlaying) {
+      audioRef.current.play().catch(err => console.error("Error playing audio stream:", err));
+    }
+  }, [musicUrl]);
 
 
   const togglePlay = () => {

@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { checkAdminAuth, getMenuData, getFeedbackData, getGalleryData } from "@/app/admin/actions";
+import { checkAdminAuth, getMenuData, getFeedbackData, getGalleryData, getSettingsData } from "@/app/admin/actions";
 import { DashboardClient } from "./dashboard-client";
 
 export default async function DashboardPage() {
@@ -8,10 +8,11 @@ export default async function DashboardPage() {
     redirect("/admin");
   }
 
-  const [menuData, feedbackData, galleryData] = await Promise.all([
+  const [menuData, feedbackData, galleryData, settingsData] = await Promise.all([
     getMenuData(),
     getFeedbackData(),
-    getGalleryData()
+    getGalleryData(),
+    getSettingsData()
   ]);
 
   return (
@@ -19,6 +20,7 @@ export default async function DashboardPage() {
       initialMenu={menuData} 
       initialFeedback={feedbackData} 
       initialGallery={galleryData} 
+      initialSettings={settingsData}
     />
   );
 }

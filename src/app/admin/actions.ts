@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { getMenuFromFirestore, saveMenuToFirestore, MenuCategory } from "@/lib/menu-service";
 import { getFeedbackFromFirestore, deleteFeedbackFromFirestore, FeedbackData, toggleFeedbackApproval } from "@/lib/feedback-service";
 import { getGalleryFromFirestore, saveGalleryToFirestore, GalleryItem } from "@/lib/gallery-service";
+import { getSettingsFromFirestore, saveSettingsToFirestore, SettingsData } from "@/lib/settings-service";
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "muzar2024";
 const AUTH_COOKIE = "admin_auth";
@@ -94,3 +95,21 @@ export async function saveGalleryData(items: GalleryItem[]): Promise<{ success: 
     return { success: false, error: "Gagal menyimpan galeri." };
   }
 }
+
+// --- Settings ---
+export async function getSettingsData(): Promise<SettingsData> {
+  return getSettingsFromFirestore();
+}
+
+export async function saveSettingsData(settings: SettingsData): Promise<{ success: boolean; error?: string }> {
+  try {
+    await saveSettingsToFirestore(settings);
+    revalidatePath("/");
+    revalidatePath("/admin/dashboard");
+    return { success: true };
+  } catch (error) {
+    console.error("Error saving settings:", error);
+    return { success: false, error: "Gagal menyimpan pengaturan." };
+  }
+}
+

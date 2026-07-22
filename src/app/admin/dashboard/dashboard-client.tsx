@@ -2,14 +2,15 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { saveMenuData, logoutAdmin, deleteFeedbackAction, toggleFeedbackApprovalAction, saveGalleryData } from "@/app/admin/actions";
+import { saveMenuData, logoutAdmin, deleteFeedbackAction, toggleFeedbackApprovalAction, saveGalleryData, saveSettingsData } from "@/app/admin/actions";
 import { FeedbackData } from "@/lib/feedback-service";
 import { GalleryItem } from "@/lib/gallery-service";
+import { SettingsData } from "@/lib/settings-service";
 import { MenuTab } from "@/components/admin/menu-tab";
 import { GalleryTab } from "@/components/admin/gallery-tab";
 import { FeedbackTab } from "@/components/admin/feedback-tab";
 import {
-  ChefHat, Save, LogOut, Check, Package, Loader2, MessageSquare, Camera, X
+  ChefHat, Save, LogOut, Check, Package, Loader2, MessageSquare, Camera, X, Music2
 } from "lucide-react";
 
 interface MenuItem {
@@ -29,15 +30,18 @@ interface Props {
   initialMenu: MenuCategory[];
   initialFeedback: FeedbackData[];
   initialGallery: GalleryItem[];
+  initialSettings: SettingsData;
 }
 
-export function DashboardClient({ initialMenu, initialFeedback, initialGallery }: Props) {
-  const [activeTab, setActiveTab] = useState<"menu" | "gallery" | "feedback">("menu");
+export function DashboardClient({ initialMenu, initialFeedback, initialGallery, initialSettings }: Props) {
+  const [activeTab, setActiveTab] = useState<"menu" | "gallery" | "feedback" | "settings">("menu");
   const [menu, setMenu] = useState<MenuCategory[]>(initialMenu);
   const [gallery, setGallery] = useState<GalleryItem[]>(initialGallery);
+  const [settings, setSettings] = useState<SettingsData>(initialSettings);
   
   const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const [gallerySaveStatus, setGallerySaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
+  const [settingsSaveStatus, setSettingsSaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
 
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
@@ -64,6 +68,18 @@ export function DashboardClient({ initialMenu, initialFeedback, initialGallery }
     } else {
       setGallerySaveStatus("error");
       setTimeout(() => setGallerySaveStatus("idle"), 3000);
+    }
+  };
+
+  const handleSaveSettings = async () => {
+    setSettingsSaveStatus("saving");
+    const res = await saveSettingsData(settings);
+    if (res.success) {
+      setSettingsSaveStatus("saved");
+      setTimeout(() => setSettingsSaveStatus("idle"), 2500);
+    } else {
+      setSettingsSaveStatus("error");
+      setTimeout(() => setSettingsSaveStatus("idle"), 3000);
     }
   };
 
@@ -172,6 +188,30 @@ export function DashboardClient({ initialMenu, initialFeedback, initialGallery }
               </>
             )}
 
+            {activeTab === "settings" && (
+              <button
+                onClick={handleSaveSettings}
+                disabled={settingsSaveStatus === "saving"}
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 ${
+                  settingsSaveStatus === "saved"
+                    ? "bg-emerald-500 text-foreground"
+                    : settingsSaveStatus === "error"
+                    ? "bg-red-500 text-foreground"
+                    : "bg-orange-500 hover:bg-orange-400 text-foreground hover:shadow-[0_0_15px_rgba(249,115,22,0.3)]"
+                } disabled:opacity-50`}
+              >
+                {settingsSaveStatus === "saving" ? (
+                  <><Loader2 className="w-4 h-4 animate-spin" /> Menyimpan...</>
+                ) : settingsSaveStatus === "saved" ? (
+                  <><Check className="w-4 h-4" /> Tersimpan!</>
+                ) : settingsSaveStatus === "error" ? (
+                  <><X className="w-4 h-4" /> Gagal Simpan</>
+                ) : (
+                  <><Save className="w-4 h-4" /> Simpan Pengaturan</>
+                )}
+              </button>
+            )}
+
             <button
               onClick={handleLogout}
               className="flex items-center gap-2 px-3 py-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted transition-all text-sm"
@@ -224,6 +264,16 @@ export function DashboardClient({ initialMenu, initialFeedback, initialGallery }
               </span>
             )}
           </button>
+
+          <button
+            onClick={() => setActiveTab("settings")}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+              activeTab === "settings" ? "bg-orange-500/10 text-orange-400 border border-orange-500/20" : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+            }`}
+          >
+            <Music2 className="w-4 h-4" />
+            Musik
+          </button>
         </div>
 
         {/* Tab Contents */}
@@ -242,6 +292,37 @@ export function DashboardClient({ initialMenu, initialFeedback, initialGallery }
             onDelete={handleDeleteFeedback}
             onToggleApproval={handleToggleApproval}
           />
+        )}
+
+        {activeTab === "settings" && (
+          <div className="bg-card border border-border rounded-2xl p-6 space-y-6">
+            <div>
+              <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
+                <Music2 className="w-5 h-5 text-orange-400" />
+                Musik
+              </h2>
+              <p className="text-sm text-muted-foreground mt-1">
+                Atur URL streaming audio/musik latar belakang untuk halaman utama.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="music-url" className="text-sm font-medium text-foreground block">
+                Link Streaming Audio (URL Stream/AAC/MP3)
+              </label>
+              <input
+                id="music-url"
+                type="text"
+                value={settings.musicUrl}
+                onChange={(e) => setSettings({ ...settings, musicUrl: e.target.value })}
+                className="w-full px-4 py-2 bg-muted border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500/50 text-foreground transition-all"
+                placeholder="https://s2.cloudmu.id/listen/prambors/radio.aac"
+              />
+              <p className="text-xs text-muted-foreground">
+                Pastikan link merupakan direct audio stream (seperti .aac, .mp3, atau URL streaming shoutcast/icecast).
+              </p>
+            </div>
+          </div>
         )}
       </main>
     </div>

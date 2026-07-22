@@ -12,8 +12,11 @@ import { PromoStory } from "@/components/promo-story";
 import { Socials } from "@/components/socials";
 import { WhyUs } from "@/components/why-us";
 import { FeedbackShowcase } from "@/components/feedback-showcase";
+import { getSettingsFromFirestore } from "@/lib/settings-service";
 
-export default function Home() {
+export default async function Home() {
+  const settings = await getSettingsFromFirestore();
+
   return (
     <div className="flex flex-col min-h-screen">
       <Hero />
@@ -31,7 +34,7 @@ export default function Home() {
         <Location />
       </main>
       <Footer />
-      <OrderDock />
+      <OrderDock musicUrl={settings.musicUrl} />
     </div>
   );
 }
