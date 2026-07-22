@@ -1,6 +1,6 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "./firebase";
-import { menuCategories as staticMenu } from "@/components/menu.ts";
+import { menuCategories as staticMenu } from "@/components/menu-data";
 
 export interface MenuItem {
   name: string;

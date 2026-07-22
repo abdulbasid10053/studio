@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { getMenuFromFirestore, saveMenuToFirestore, MenuCategory } from "@/lib/menu-service";
 import { getFeedbackFromFirestore, deleteFeedbackFromFirestore, FeedbackData, toggleFeedbackApproval } from "@/lib/feedback-service";
+import { getGalleryFromFirestore, saveGalleryToFirestore, GalleryItem } from "@/lib/gallery-service";
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "muzar2024";
 const AUTH_COOKIE = "admin_auth";
@@ -32,6 +33,7 @@ export async function checkAdminAuth(): Promise<boolean> {
   return cookieStore.get(AUTH_COOKIE)?.value === "authenticated";
 }
 
+// --- Menu ---
 export async function getMenuData(): Promise<MenuCategory[]> {
   return getMenuFromFirestore();
 }
@@ -39,7 +41,7 @@ export async function getMenuData(): Promise<MenuCategory[]> {
 export async function saveMenuData(categories: MenuCategory[]): Promise<{ success: boolean; error?: string }> {
   try {
     await saveMenuToFirestore(categories);
-    revalidatePath("/"); // Hapus cache halaman utama
+    revalidatePath("/");
     return { success: true };
   } catch (error) {
     console.error("Error saving menu:", error);
@@ -47,6 +49,7 @@ export async function saveMenuData(categories: MenuCategory[]): Promise<{ succes
   }
 }
 
+// --- Feedback ---
 export async function getFeedbackData(): Promise<FeedbackData[]> {
   return getFeedbackFromFirestore();
 }
@@ -55,7 +58,7 @@ export async function deleteFeedbackAction(id: string): Promise<{ success: boole
   try {
     await deleteFeedbackFromFirestore(id);
     revalidatePath("/admin/dashboard");
-    revalidatePath("/"); // Hapus dari halaman utama juga jika dipublish
+    revalidatePath("/");
     return { success: true };
   } catch (error) {
     console.error("Error deleting feedback:", error);
@@ -75,3 +78,19 @@ export async function toggleFeedbackApprovalAction(id: string, isApproved: boole
   }
 }
 
+// --- Gallery ---
+export async function getGalleryData(): Promise<GalleryItem[]> {
+  return getGalleryFromFirestore();
+}
+
+export async function saveGalleryData(items: GalleryItem[]): Promise<{ success: boolean; error?: string }> {
+  try {
+    await saveGalleryToFirestore(items);
+    revalidatePath("/");
+    revalidatePath("/admin/dashboard");
+    return { success: true };
+  } catch (error) {
+    console.error("Error saving gallery:", error);
+    return { success: false, error: "Gagal menyimpan galeri." };
+  }
+}

@@ -26,23 +26,23 @@ export function BestSeller() {
       pill="Menu Singkat"
       title="🔥 Favorit sering sold out"
     >
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="flex overflow-x-auto snap-x snap-mandatory gap-3.5 pb-3 scrollbar-none md:grid md:grid-cols-2 md:gap-6 -mx-4 px-4 sm:mx-0 sm:px-0">
         {bestSellers.map((item) => (
-          <Card key={item.name} className="p-6 bg-card border-border shadow-lg flex items-center gap-5 hover:border-primary/50 transition-colors">
+          <Card key={item.name} className="flex-shrink-0 w-[82vw] max-w-[340px] md:w-auto snap-center p-4 sm:p-6 bg-card border-border shadow-lg flex items-center gap-4 sm:gap-5 hover:border-primary/50 transition-colors">
             <Image
               src={item.image}
               alt={item.name}
-              width={100}
-              height={100}
-              className="rounded-lg object-cover border border-border aspect-square"
+              width={90}
+              height={90}
+              className="rounded-lg object-cover border border-border aspect-square flex-shrink-0"
               data-ai-hint={item.aiHint}
             />
-            <div className="flex-grow">
-              <div className="flex justify-between items-start">
-                <h3 className="font-headline text-2xl font-bold">{item.name}</h3>
-                <span className="font-bold text-primary text-lg">Rp {item.price}</span>
+            <div className="flex-grow min-w-0">
+              <div className="flex justify-between items-start gap-2">
+                <h3 className="font-headline text-lg sm:text-2xl font-bold truncate">{item.name}</h3>
+                <span className="font-bold text-primary text-base sm:text-lg flex-shrink-0">Rp {item.price}</span>
               </div>
-              <p className="text-foreground/80 mt-1">{item.description}</p>
+              <p className="text-xs sm:text-sm text-foreground/80 mt-1 line-clamp-2">{item.description}</p>
             </div>
           </Card>
         ))}

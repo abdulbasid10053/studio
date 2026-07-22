@@ -5,7 +5,7 @@ import { Dices, Sparkles } from "lucide-react";
 import { Section } from "./section";
 import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
-import { menuCategories } from "./menu.ts";
+import { menuCategories } from "./menu-data";
 
 interface MenuItem {
   name: string;

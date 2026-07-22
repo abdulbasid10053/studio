@@ -1,5 +1,6 @@
 import { RandomMenuPicker } from "@/components/random-menu-picker";
 import { BestSeller } from "@/components/best-seller";
+import { Gallery } from "@/components/gallery";
 import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
 import { Location } from "@/components/location";
@@ -19,6 +20,7 @@ export default function Home() {
       <main>
         <WhyUs />
         <BestSeller />
+        <Gallery />
         <Menu />
         <Payment />
         <Order />

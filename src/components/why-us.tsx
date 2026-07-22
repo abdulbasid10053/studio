@@ -27,15 +27,15 @@ export function WhyUs() {
       pill="Kenapa Harus Coba?"
       title="Lebih dari sekadar nasi goreng"
     >
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="flex overflow-x-auto snap-x snap-mandatory gap-3.5 pb-3 scrollbar-none sm:grid sm:grid-cols-3 sm:gap-6 -mx-4 px-4 sm:mx-0 sm:px-0">
         {features.map((feature, index) => (
-          <Card key={index} className="bg-card border-border shadow-lg hover:border-primary/50 transition-colors cursor-pointer">
-            <CardHeader>
+          <Card key={index} className="flex-shrink-0 w-[75vw] max-w-[260px] sm:w-auto snap-center bg-card border-border shadow-lg hover:border-primary/50 transition-colors cursor-pointer">
+            <CardHeader className="p-4 sm:p-6">
               {feature.icon}
-              <CardTitle className="pt-2">{feature.title}</CardTitle>
+              <CardTitle className="pt-2 text-lg sm:text-xl">{feature.title}</CardTitle>
             </CardHeader>
-            <CardContent>
-              <p className="text-foreground/80">{feature.description}</p>
+            <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6 pt-0">
+              <p className="text-xs sm:text-sm text-foreground/80 leading-relaxed">{feature.description}</p>
             </CardContent>
           </Card>
         ))}

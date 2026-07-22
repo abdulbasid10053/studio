@@ -33,7 +33,7 @@ export const VoiceInput: React.FC<VoiceInputProps> = ({ onResult }) => {
     recognizer.interimResults = false;
     recognizer.maxAlternatives = 1;
 
-    recognizer.onresult = (event: SpeechRecognitionEvent) => {
+    recognizer.onresult = (event: any) => {
       const transcript = event.results[0][0].transcript.trim();
       onResult(transcript);
     };
