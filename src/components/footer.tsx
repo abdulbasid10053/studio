@@ -12,7 +12,7 @@ export function Footer() {
   }, []);
 
   return (
-    <footer className="container py-12 text-foreground/70 border-t border-white/5">
+    <footer className="container py-12 text-foreground/70 border-t border-border/50">
       <div className="grid md:grid-cols-3 gap-8">
         <div>
           <h3 className="font-headline font-bold text-lg mb-2 text-foreground">Jam Operasional</h3>
@@ -35,7 +35,7 @@ export function Footer() {
           </ul>
         </div>
       </div>
-      <p className="mt-8 pt-8 border-t border-white/5 text-sm text-foreground/50">
+      <p className="mt-8 pt-8 border-t border-border/50 text-sm text-foreground/50">
         © {year} Muzar Eats (Nasgor X Starbag Muzar).<br /> Build With ♥️
       </p>
     </footer>

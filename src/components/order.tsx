@@ -26,7 +26,7 @@ export function Order() {
             rel="noopener noreferrer"
             className="block"
           >
-            <Card className="bg-card border-white/10 shadow-lg hover:bg-accent/20 hover:border-primary/50 transition-all duration-300 transform hover:-translate-y-1">
+            <Card className="bg-card border-border shadow-lg hover:bg-accent/20 hover:border-primary/50 transition-all duration-300 transform hover:-translate-y-1">
               <div className="flex flex-col items-center justify-center p-6 gap-3 h-full">
                 {platform.icon}
                 <span className="font-semibold text-center">{platform.name}</span>

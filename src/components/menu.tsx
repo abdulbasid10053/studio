@@ -14,7 +14,7 @@ export async function Menu() {
     >
       <div className="grid lg:grid-cols-2 gap-8">
         {menuCategories.map((category) => (
-          <Card key={category.category} className="p-6 bg-card border-white/10 shadow-lg flex flex-col hover:border-primary/50 transition-colors">
+          <Card key={category.category} className="p-6 bg-card border-border shadow-lg flex flex-col hover:border-primary/50 transition-colors">
             <div className="flex-grow">
               <div className="flex items-start gap-4 mb-4">
                 <Image
@@ -22,7 +22,7 @@ export async function Menu() {
                   alt={category.category}
                   width={100}
                   height={75}
-                  className="rounded-lg object-cover border border-white/10 aspect-[4/3]"
+                  className="rounded-lg object-cover border border-border aspect-[4/3]"
                   data-ai-hint={category.aiHint}
                 />
                 <div>
@@ -34,7 +34,7 @@ export async function Menu() {
                 {category.items.map((item) => (
                   <li key={item.name} className="flex justify-between items-baseline gap-2">
                     <span className="text-foreground/90">{item.name}</span>
-                    <div className="flex-grow border-b border-dashed border-white/10 mx-2"></div>
+                    <div className="flex-grow border-b border-dashed border-border mx-2"></div>
                     <span className="font-bold text-primary">{item.price}</span>
                   </li>
                 ))}

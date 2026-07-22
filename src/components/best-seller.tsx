@@ -28,13 +28,13 @@ export function BestSeller() {
     >
       <div className="grid md:grid-cols-2 gap-6">
         {bestSellers.map((item) => (
-          <Card key={item.name} className="p-6 bg-card border-white/10 shadow-lg flex items-center gap-5 hover:border-primary/50 transition-colors">
+          <Card key={item.name} className="p-6 bg-card border-border shadow-lg flex items-center gap-5 hover:border-primary/50 transition-colors">
             <Image
               src={item.image}
               alt={item.name}
               width={100}
               height={100}
-              className="rounded-lg object-cover border border-white/10 aspect-square"
+              className="rounded-lg object-cover border border-border aspect-square"
               data-ai-hint={item.aiHint}
             />
             <div className="flex-grow">

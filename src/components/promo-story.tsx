@@ -21,7 +21,7 @@ export function PromoStory() {
             Jadi, kapan mau mampir dan jadi bagian dari cerita kami?
           </p>
         </div>
-        <Card className="bg-card border-white/10 shadow-lg hover:border-primary/50 transition-colors cursor-pointer">
+        <Card className="bg-card border-border shadow-lg hover:border-primary/50 transition-colors cursor-pointer">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
               <div className="bg-primary/10 p-3 rounded-full">
