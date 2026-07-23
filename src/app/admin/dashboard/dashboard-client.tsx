@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { saveMenuData, logoutAdmin, deleteFeedbackAction, toggleFeedbackApprovalAction, saveGalleryData, saveSettingsData } from "@/app/admin/actions";
 import { FeedbackData } from "@/lib/feedback-service";
 import { GalleryItem } from "@/lib/gallery-service";
@@ -111,7 +112,7 @@ export function DashboardClient({ initialMenu, initialFeedback, initialGallery, 
       {/* Header */}
       <header className="sticky top-0 z-10 bg-card/95 backdrop-blur border-b border-border">
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
             <div className="w-9 h-9 bg-orange-500/10 border border-orange-500/20 rounded-xl flex items-center justify-center">
               <ChefHat className="w-5 h-5 text-orange-400" />
             </div>
@@ -119,7 +120,7 @@ export function DashboardClient({ initialMenu, initialFeedback, initialGallery, 
               <h1 className="font-bold text-foreground leading-none">Admin Dashboard</h1>
               <p className="text-xs text-muted-foreground mt-0.5">Muzar Eats — Panel Pengelola</p>
             </div>
-          </div>
+          </Link>
 
           <div className="flex items-center gap-3">
             {activeTab === "menu" && (

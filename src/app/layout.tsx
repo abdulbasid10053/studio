@@ -141,7 +141,7 @@ export default function RootLayout({
       <body className={cn(inter.variable, spaceGrotesk.variable, 'font-body antialiased')} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >

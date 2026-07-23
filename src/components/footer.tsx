@@ -17,7 +17,7 @@ export function Footer() {
         <div>
           <h3 className="font-headline font-bold text-lg mb-2 text-foreground">Jam Operasional</h3>
           <p>Setiap hari: <strong>17.00 – 01.00 WIB</strong></p>
-          <p>Lokasi: <strong>Jl. KHA Dahlan No.7, Purworejo, Kec. Purworejo, Kabupaten Purworejo, Jawa Tengah 54183</strong></p>
+          <p>Lokasi: <strong><a href="https://maps.app.goo.gl/H7mqtXiNZ6cZnXSu7" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Jl. KHA Dahlan No.7, Purworejo, Kec. Purworejo, Kabupaten Purworejo, Jawa Tengah 54183</a></strong></p>
         </div>
         <div>
           <h3 className="font-headline font-bold text-lg mb-2 text-foreground">Ikuti & Kunjungi</h3>
